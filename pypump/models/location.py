@@ -37,7 +37,7 @@ class Location(AbstractModel):
 
     @staticmethod
     def unserialize(data, obj=None):
-        name = data["displayName"]
+        name = data["position"]
         if obj is None:
             return Location(name=name)
         else:
