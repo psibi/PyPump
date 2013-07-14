@@ -141,6 +141,7 @@ class Note(AbstractModel):
 
         # post it!
         data = self._pump.request(self.ENDPOINT % self._pump.nickname, method="POST", data=self.serialize())
+        self.id = data['object']['id']
 
         # we need to actually store the new note data the server has sent back
         if "error" in data:
@@ -165,7 +166,7 @@ class Note(AbstractModel):
         }
 
         data = self._pump.request("/api/user/%s/feed" % self._pump.nickname, method="POST", data=activity)
-        
+
         if data.get("verb", None) == activity["verb"]:
             self.deleted = True
             return True
